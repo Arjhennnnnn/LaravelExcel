@@ -262,7 +262,7 @@
 
 
 
-##  To Explore more about Laravel Excel  🚀 Click : <a href="https://github.com/barryvdh/laravel-dompdf"> https://github.com/barryvdh/laravel-dompdf </a>
+##  🚀🚀🚀 To Explore more about Laravel Excel <a href="https://docs.laravel-excel.com/3.1/getting-started/"> Laravel Excel </a>
 
 
 
