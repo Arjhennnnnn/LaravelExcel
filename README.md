@@ -1,4 +1,4 @@
-<h1> Laravel Excel </h1>
+<h1> 🚀🚀🚀 Laravel Excel </h1>
 
 ## Installation
 
@@ -10,7 +10,7 @@
 
 
  
-## [1] [ Command ] => 
+## [1] [ Command ] 
 
 -> composer require maatwebsite/excel
 
@@ -43,7 +43,7 @@
 
     Check if [ excel.php ] register in  [ config ]
 
-## [5] Try to Create Migration [ Command ] => 
+## [5] Try to Create Migration [ Command ] 
 
     -> php artisan make:migration create_customer_table --create
 
@@ -60,7 +60,7 @@
 
 
 
-<h2> How to Import Excel Data </h2>
+<h1> 🚀🚀🚀 How to Import Excel Data </h1>
 
 ## [1] Add Form to Trigger Import Excel Data 
 
@@ -75,7 +75,7 @@
 
     -> php artisan make:import CustomersImport
 
-## [3] Insert this code in collection function =>
+## [3] Insert this code in collection function
 
     ->    foreach ($rows as $row) {
     ->         Customer::create([
@@ -85,7 +85,7 @@
     ->         ]);
     ->     }
 
-## [4] Create Controller and make a ImportExcelData function => 
+## [4] Create Controller and make a ImportExcelData function 
 
     -> function importExcelData(Request $request){
 
@@ -95,13 +95,15 @@
 
     ->    return 'success';
 
+    -> }
+
+
 <h5> 
     Important Notice !!! 
     Make sure your excel file has one worksheet only
 </h5>
 
 
-    -> }
 
 
 ## [5] To add Heading Row , implement [ WithHeadingRow ]
