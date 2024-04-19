@@ -10,113 +10,103 @@
 
 
  
-[1] [ Command ] => 
+## [1] [ Command ] => 
 
-## composer require maatwebsite/excel
+-> composer require maatwebsite/excel
 
 
-[2] [ Register ServiceProvider ] 
+## [2] [ Register ServiceProvider ] 
 
-    -> [ Go to ] => 
+    [ Go to ] => 
     
-## config/app.php
+        -> config/app.php
 
-     -> Go to providers and add => [ Maatwebsite\Excel\ExcelServiceProvider ]
+    Go to providers and add => [ Maatwebsite\Excel\ExcelServiceProvider ]
 
-##  'providers' => [
-##         /*
-##          * Package Service Providers...
-##          */
-##           Maatwebsite\Excel\ExcelServiceProvider::class,
-##    ]
-
-
-[3] Add the Facade in [ config/app.php ]
-
-## 'aliases' => [
-##    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-## ]
-
-[4] To publish the config, run the vendor publish command:
-
-## php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
-
-    -> check if [ excel.php ] register in  [ config ]
+        ->  'providers' => [
+        ->         /*
+        ->          * Package Service Providers...
+        ->          */
+        ->           Maatwebsite\Excel\ExcelServiceProvider::class,
+        ->    ]
 
 
+## [3] Add the Facade in [ config/app.php ]
 
-[5] Try to Create Migration [ Command ] => 
+        -> 'aliases' => [
+        ->    'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        -> ]
 
-## php artisan make:migration create_customer_table --create
+## [4] To publish the config, run the vendor publish command:
 
-[6] Add Customer Name , Email , Phone in database/migration
+    -> php artisan vendor:publish --provider="Maatwebsite\Excel\ExcelServiceProvider" --tag=config
 
-## $table->string('name');
-## $table->string('email');
-## $table->string('phone');
+    Check if [ excel.php ] register in  [ config ]
 
-[7] Add Customer Model
+## [5] Try to Create Migration [ Command ] => 
 
-## php artisan make:model Customer
+    -> php artisan make:migration create_customer_table --create
+
+## [6] Add Customer Name , Email , Phone in database/migration
+
+    -> $table->string('name');
+    -> $table->string('email');
+    -> $table->string('phone');
+
+## [7] Add Customer Model
+
+    ->php artisan make:model Customer
 
 
 
 
-<<<<<<--------------------- How to Import Excel Data ---------------------->>>>>>
+<h2> How to Import Excel Data </h2>
+
+## [1] Add Form to Trigger Import Excel Data 
+
+    -> action = action"{{ url(/customer/import) }}"
+    -> method = POST
+    -> enctype = multipart/form-data
 
 
+    -> input = type[file] name[import_file]
+
+## [2] 💪 Create an import class in app/Imports [ make:import ]
+
+    -> php artisan make:import CustomersImport
+
+## [3] Insert this code in collection function =>
+
+    ->    foreach ($rows as $row) {
+    ->         Customer::create([
+    ->             'name' => $row['name'],    // small letter
+    ->             'email' => $row['email'],  // small letter
+    ->             'phone' => $row['phone'],  // small letter
+    ->         ]);
+    ->     }
+
+## [4] Create Controller and make a ImportExcelData function => 
+
+    -> function importExcelData(Request $request){
+
+    [ Add this code in your importExcelData function ]
+
+    ->  Excel::import (new CustomerImport, $request->file('import_file));
+
+    ->    return 'success';
+
+<h5> 
+    Important Notice !!! 
+    Make sure your excel file has one worksheet only
+</h5>
 
 
-## How to Import Excel Data
-
-<h1> How Import Excel Data </h1>
+    -> }
 
 
-[1] Add Form to Trigger Import Excel Data 
+## [5] To add Heading Row , implement [ WithHeadingRow ]
 
-## action = action"{{ url(/customer/import) }}"
-## method = POST
-## enctype = multipart/form-data
-
-
-## input = type[file] name[import_file]
-
-[2] 💪 Create an import class in app/Imports [ make:import ]
-
-## php artisan make:import CustomersImport
-
-[3] Insert this code in collection function =>
-
-##    foreach ($rows as $row) {
-##         Customer::create([
-##             'name' => $row['name'],    // small letter
-##             'email' => $row['email'],  // small letter
-##             'phone' => $row['phone'],  // small letter
-##         ]);
-##     }
-
-[4] Create Controller and make a ImportExcelData function => 
-
-## function importExcelData(Request $request){
-#   
-
-[ Add this code in your importExcelData function ]
-
-##  Excel::import (new CustomerImport, $request->file('import_file));
-    return 'success';
-
-<h1> Important Notice !!! </h1>
-
-<h2> Make sure your excel file has one worksheet only </h2>
-
-## }
-
-
-[5] To add Heading Row , implement [ WithHeadingRow ]
-
-##  class CustomerImport implements ToCollection , withHeadingRow
-
-
+    ->  class CustomerImport implements ToCollection , withHeadingRow
 
 <<<<<<--------------------- How to Export Excel Data ---------------------->>>>>>
 
