@@ -110,153 +110,154 @@
 
     ->  class CustomerImport implements ToCollection , withHeadingRow
 
-<<<<<<--------------------- How to Export Excel Data ---------------------->>>>>>
 
 
-## How to Export Excel Data
 
-<h1> How Export Excel Data </h1>
-
-[1] 💪 Create an export class in app/Exports [ make:export ]
-
-## php artisan make:export CustomerExport
+<h1> 🚀🚀🚀 How to Export Excel Data </h1>
 
 
-[2] Insert this code in collection function =>
+## [1] 💪 Create an export class in app/Exports [ make:export ]
 
-##    return Customer::all();
-
-
-[3] Create Controller and make a ExportExcelData function => 
-
-## function exportExcelData(Request $request){
-#   
-
-[ Add this code in your exportExcelData function ]
-##  $filename = 'customers.xlsx';
-##  return Excel::download (new CustomerExport, $filename);
-
-## }
-
-[4] Add Form to Trigger Export Excel Data 
-
-## action = action"{{ url(/customer/export) }}"
-## method = GET
-
-[ And now you can export/download the excel file ]
+    -> php artisan make:export CustomerExport
 
 
-<h1> To improve your Export Excel Data </h1>
+## [2] Insert this code in collection function 
 
-[5] Go to collection again [...Step 2] if you want to [ Add Headings ]  
-
-=>  implement [ WithHeadingRow ]
-##  class CustomerExport implements FromCollection , withHeadings
-
-And add function =>
-
-## public function headings() : array 
-## {
-##     return [
-##         "Name",
-##         "Email",
-##         "Password"
-##     ]
-## }
-
-and let's change this query also =>
-
-## public function collection()
-## {
-##     return Customer::select('name','email','phone')->get();
-## }
-
-[6] One more method of Downloading the Excel Sheet [ using the blade view ]
-
-=>  implement [ FromView ]
-##  class CustomerExport implements FromView 
-
-And Import =>
-
-## use Illuminate\Contracts\View\View
-## use Maatwebsite\Excel\Concerns\FromView
-
-Add function => 
-
-## public function view() : View
-## {
-##     return view('customer.invoices' , [
-##         'customers' => Customer::all()
-##     ])
-## }
-
-Add [ View Resource ] and CopyPaste this HtmlCode => 
-
-## <!-- <table> -->
-##     <!-- <thead> -->
-##         <!-- <tr> -->
-##             <!-- <th>Name</th> -->
-##             <!-- <th>Email</th> -->
-##             <!-- <th>Phone</th> -->
- <!--##  -->
-##         <!-- </tr> -->
-##     <!-- </thead> -->
-##     <!-- <tbody> -->
-##         <!-- @foreach($customers as $customer) -->
-##         <!-- <tr> -->
-##             <!-- <td>{{ $customer->name }}</td> -->
-##             <!-- <td>{{ $customer->email }}</td> -->
-##             <!-- <td>{{ $customer->phone }}</td> -->
- <!--##  -->
-##         <!-- </tr> -->
-##         <!-- @endforeach -->
-##     <!-- </tbody> -->
-## <!-- </table> -->
+    ->   return Customer::all();
 
 
-[7] Export Format
+## [3] Create Controller and make a ExportExcelData function => 
 
-=> Laravel Excel have three ways of Exporting Data [ xlsx ] [ csv ] [ xls ]
+    -> function exportExcelData(Request $request){
+   
+    [ Add this code in your exportExcelData function ]
 
-##       switch ($request->type) {
-##
-##           case 'xlsx':
-##
-##               $extension = "xlsx";
-##
-##               $exportFormat = \Maatwebsite\Excel\Excel::XLSX;
-##
-##               break;
-##
-##           case 'csv':
-##
-##               $extension = "csv";
-##
-##               $exportFormat = \Maatwebsite\Excel\Excel::CSV;
-##
-##               break;
-##
-##           case 'xls':
-##
-##               $extension = "xls";
-##
-##               $exportFormat = \Maatwebsite\Excel\Excel::XLS;
-##
-##               break;
-##
-##           default:
-##
-##               $extension = "xlsx";
-##
-##               $exportFormat = \Maatwebsite\Excel\Excel::XLS;
-##
-##               break;
-##       }
-##
-##
-##       $filename = 'customers-' . date('d-m-y') . '.' . $extension;
-##
-##       return Excel::download(new CustomerExport, $filename, $exportFormat);
+    -> $filename = 'customers.xlsx';
+    ->  return Excel::download (new CustomerExport, $filename);
+
+    -> }
+
+## [4] Add Form to Trigger Export Excel Data 
+
+    -> action = action"{{ url(/customer/export) }}"
+    -> method = GET
+
+    [ And now you can export/download the excel file ]
+
+
+<h1> 🚀🚀 To improve your Export Excel Data </h1>
+
+## [5] Go to collection again [...Step 2] if you want to [ Add Headings ]  
+
+    =>  implement [ WithHeadingRow ]
+
+    ->  class CustomerExport implements FromCollection , withHeadings
+
+    And add function =>
+
+    -> public function headings() : array 
+    -> {
+    ->     return [
+    ->         "Name",
+    ->         "Email",
+    ->         "Password"
+    ->     ]
+    -> }
+
+    and let's change this query also =>
+
+    -> public function collection()
+    -> {
+    ->     return Customer::select('name','email','phone')->get();
+    -> }
+
+## [6] One more method of Downloading the Excel Sheet [ using the blade view ]
+
+    =>  implement [ FromView ]
+
+    ->  class CustomerExport implements FromView 
+
+    And Import =>
+
+    -> use Illuminate\Contracts\View\View
+    -> use Maatwebsite\Excel\Concerns\FromView
+
+    Add function => 
+
+    -> public function view() : View
+    -> {
+    ->     return view('customer.invoices' , [
+    ->         'customers' => Customer::all()
+    ->     ])
+    -> }
+
+    Add [ View Resource ] and CopyPaste this HtmlCode => 
+
+    -> <table>
+    ->     <thead>
+    ->         <tr>
+    ->             <th>Name</th>
+    ->             <th>Email</th>
+    ->             <th>Phone</th>
+    ->  
+    ->         </tr>
+    ->     </thead>
+    ->     <tbody>
+    ->         @foreach($customers as $customer)
+    ->         <tr>
+    ->             <td>{{ $customer->name }}</td>
+    ->             <td>{{ $customer->email }}</td>
+    ->             <td>{{ $customer->phone }}</td>
+    ->  
+    ->         </tr>
+    ->         @endforeach
+    ->     </tbody>
+    -> </table>
+
+
+## [7] 🚀 Export Format
+
+    => Laravel Excel have three ways of Exporting Data [ xlsx ] [ csv ] [ xls ]
+
+    ->       switch ($request->type) {
+    ->
+    ->           case 'xlsx':
+    ->
+    ->               $extension = "xlsx";
+    ->
+    ->               $exportFormat = \Maatwebsite\Excel\Excel::XLSX;
+    ->
+    ->               break;
+    ->
+    ->           case 'csv':
+    ->
+    ->               $extension = "csv";
+    ->
+    ->               $exportFormat = \Maatwebsite\Excel\Excel::CSV;
+    ->
+    ->               break;
+    ->
+    ->           case 'xls':
+    ->
+    ->               $extension = "xls";
+    ->
+    ->               $exportFormat = \Maatwebsite\Excel\Excel::XLS;
+    ->
+    ->               break;
+    ->
+    ->           default:
+    ->
+    ->               $extension = "xlsx";
+    ->
+    ->               $exportFormat = \Maatwebsite\Excel\Excel::XLS;
+    ->
+    ->               break;
+    ->       }
+    ->
+    ->
+    ->       $filename = 'customers-' . date('d-m-y') . '.' . $extension;
+    ->
+    ->       return Excel::download(new CustomerExport, $filename, $exportFormat);
 
 
 
