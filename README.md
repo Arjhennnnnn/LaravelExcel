@@ -262,7 +262,7 @@
 
 
 
-##  🚀🚀🚀 To Explore more about Laravel Excel <a href="https://docs.laravel-excel.com/3.1/getting-started/"> Laravel Excel </a>
+##  🚀🚀🚀 To Explore more about <a href="https://docs.laravel-excel.com/3.1/getting-started/"> Laravel Excel </a>
 
 
 
